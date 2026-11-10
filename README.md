@@ -29,5 +29,5 @@ Run `python3 scripts/skills.py list`. Enable only the groups a project needs, be
 
 Skills are whole folders: `SKILL.md` plus any scripts, references and assets next to it are copied together.
 
-## Credits
+## Credits (full table in NOTICE.md)
 superpowers (Jesse Vincent, MIT), task-observer (Eoghan Henn, CC BY 4.0), impeccable (Paul Bakaus), claude-mem (Alex Newman, Apache 2.0), find-skills (vercel-labs/skills, MIT). Some imported skills come from third parties, keep their licences when sharing.
