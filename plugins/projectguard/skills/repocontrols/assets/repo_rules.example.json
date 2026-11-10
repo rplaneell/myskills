@@ -1,0 +1,8 @@
+{
+  "max_bytes": 5242880,
+  "big_file_ok": ["releases/", "assets/"],
+  "built_file": "dist/app.html",
+  "source_prefixes": ["src/", "build.py", "package.json", "package-lock.json"],
+  "subject_limit": 72,
+  "extra_forbidden": []
+}

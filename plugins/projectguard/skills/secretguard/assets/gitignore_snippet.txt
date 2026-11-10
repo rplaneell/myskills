@@ -1,0 +1,6 @@
+# Secrets: keys, tokens and passwords live only in a local .env file
+.env
+.env.*
+!.env.example
+*.pem
+*.key

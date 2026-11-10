@@ -1,0 +1,19 @@
+name: ci
+# A hardened test workflow. Run  pin_actions.py --write --newest  after copying so every action is pinned to a full commit SHA.
+on: [push, pull_request]
+permissions:
+  contents: read                 # least privilege: the job can read the code and nothing else
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -r requirements.txt
+      - name: Rebuilt output must equal the committed output (traceability)
+        run: |
+          python3 build.py
+          git diff --exit-code -- dist/
+      - name: Tests
+        run: python3 -m pytest tests -q

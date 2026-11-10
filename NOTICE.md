@@ -9,7 +9,7 @@ This repository bundles skills written by other people. Credit goes to them, and
 | plugins/frontend/skills/frontend-design | Anthropic | Apache 2.0, see LICENSE.txt in that folder |
 | plugins/workflow/skills/find-skills | vercel-labs/skills | MIT |
 | plugins/scholar, plugins/motion | Collected from the public repo rplaneell/nuriallotfm. The original authors are not stated there. | Not stated. Check upstream before reusing outside this project. |
-| plugins/archviz, plugins/biomech, plugins/thesis | rplaneell | Own work |
+| plugins/archviz, plugins/biomech, plugins/thesis, plugins/projectguard | rplaneell | Own work |
 
 Ready made plugins are referenced by link, not copied. They keep their own licences:
 superpowers (Jesse Vincent, MIT), task observer (Eoghan Henn, CC BY 4.0), impeccable (Paul Bakaus),
