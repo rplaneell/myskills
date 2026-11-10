@@ -19,6 +19,9 @@ Three layers, from label to enforcement:
 
 To change the always set: edit `tier` in `external.json`, or `python3 scripts/skills.py promote NAME` / `demote NAME --group G` for skills, then update the template.
 
+## What online sessions install automatically
+`always.txt` lists the plugins that every online session installs at start up. It is generated: it holds `core` plus every plugin whose `tier` is `always` in `external.json`. Change a tier, run `python3 scripts/skills.py build`, push, and the next fresh online session follows the new list. No environment settings to edit.
+
 ## Groups
 Run `python3 scripts/skills.py list`. Enable only the groups a project needs, because every enabled skill adds its description to Claude's context.
 

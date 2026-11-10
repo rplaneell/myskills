@@ -91,6 +91,9 @@ def build():
         for s in skill_dirs(core):
             lines.append(f"- {s.name}: {frontmatter(s / 'SKILL.md').get('description', '')[:200]}")
         (core / "ALWAYS.md").write_text("\n".join(lines) + "\n")
+    # always.txt: the plugins every online session installs at start up (read by the environment setup script)
+    always = (["core"] if (PLUGINS / "core").exists() else []) + [e["name"] for e in load_external() if e["tier"] == "always"]
+    (ROOT / "always.txt").write_text("\n".join(always) + "\n")
     for p in problems:
         print("PROBLEM:", p)
     print(f"built {len(plugins)} plugins, {len(seen)} skills")
