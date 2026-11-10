@@ -14,7 +14,7 @@ Manual try out inside a session: `/plugin marketplace add rplaneell/myskills` th
 ## What is "always on"?
 Three layers, from label to enforcement:
 1. **Label:** every entry in `.claude-plugin/marketplace.json` starts with a tag: `[ALWAYS ON]`, `[PER PROJECT]` or `[LOCAL MACHINE ONLY]`. Source of truth: `external.json` (ready made plugins) and the `core` plugin.
-2. **Reminder:** the `core` plugin prints `plugins/core/ALWAYS.md` at every session start, listing the must use skills.
+
 3. **Enforcement:** a plugin is only really on in a project if it is `true` under `enabledPlugins` in that project's `.claude/settings.json`. The template above enables the always set.
 
 To change the always set: edit `tier` in `external.json`, or `python3 scripts/skills.py promote NAME` / `demote NAME --group G` for skills, then update the template.
