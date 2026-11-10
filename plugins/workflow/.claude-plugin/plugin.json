@@ -1,0 +1,8 @@
+{
+  "name": "workflow",
+  "description": "General workflow helpers: security audits and keeping slides, script and paper in sync.",
+  "version": "1.0.0",
+  "author": {
+    "name": "rplaneell"
+  }
+}

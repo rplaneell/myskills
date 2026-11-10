@@ -1,0 +1,8 @@
+{
+  "name": "core",
+  "description": "ALWAYS ON skills. Enable this plugin in every project. Anything placed here is announced at every session start.",
+  "version": "1.0.0",
+  "author": {
+    "name": "rplaneell"
+  }
+}

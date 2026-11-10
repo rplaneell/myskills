@@ -1,0 +1,42 @@
+{
+  "plugins": [
+    {
+      "name": "superpowers",
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers"
+      },
+      "description": "Slows Claude down to plan, test first and verify its own work before finishing. By Jesse Vincent (MIT).",
+      "tier": "always"
+    },
+    {
+      "name": "task-observer",
+      "source": {
+        "source": "github",
+        "repo": "rebelytics/one-skill-to-rule-them-all"
+      },
+      "description": "Watches your sessions and proposes small, reviewed improvements to your skills. Nothing changes until you approve. By Eoghan Henn (CC BY 4.0).",
+      "tier": "always"
+    },
+    {
+      "name": "impeccable",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/pbakaus/impeccable.git",
+        "path": "plugin"
+      },
+      "description": "Design taste for frontend work: audit, polish and critique commands plus anti pattern checks. By Paul Bakaus.",
+      "tier": "project"
+    },
+    {
+      "name": "memory",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/thedotmack/claude-mem.git",
+        "path": "plugin"
+      },
+      "description": "Persistent memory plugin (claude-mem by Alex Newman, Apache 2.0): background worker plus local database. Use on your own computer, not in cloud sessions.",
+      "tier": "local"
+    }
+  ]
+}

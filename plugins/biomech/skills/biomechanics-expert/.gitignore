@@ -1,0 +1,19 @@
+# Secrets: never upload
+.env
+*.env
+# Personal media and generated results stay local
+*.mp4
+*.mov
+*.m4v
+*.avi
+*.mkv
+*.webm
+*.task
+*.npy
+*.pkl
+*.gif
+images/
+images_web/
+video/
+report/
+data/

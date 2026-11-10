@@ -1,0 +1,88 @@
+{
+  "name": "myskills",
+  "description": "Personal skills and plugins marketplace",
+  "owner": {
+    "name": "rplaneell"
+  },
+  "plugins": [
+    {
+      "name": "archviz",
+      "source": "./plugins/archviz",
+      "description": "[PER PROJECT] Architecture visualisation, Blender walkthroughs, renovation planning, furniture from photo."
+    },
+    {
+      "name": "biomech",
+      "source": "./plugins/biomech",
+      "description": "[PER PROJECT] Biomechanics expert pipeline with Python scripts."
+    },
+    {
+      "name": "core",
+      "source": "./plugins/core",
+      "description": "[ALWAYS ON] ALWAYS ON skills. Enable this plugin in every project. Anything placed here is announced at every session start."
+    },
+    {
+      "name": "frontend",
+      "source": "./plugins/frontend",
+      "description": "[PER PROJECT] Frontend engineering: CSS, HTML, JavaScript, accessibility, performance, design systems, components, testing."
+    },
+    {
+      "name": "motion",
+      "source": "./plugins/motion",
+      "description": "[PER PROJECT] Animation, interaction and UI craft skills, plus Swift and mobile native."
+    },
+    {
+      "name": "scholar",
+      "source": "./plugins/scholar",
+      "description": "[PER PROJECT] Academic research and writing: literature review, analysis, citations, replication, journal submission."
+    },
+    {
+      "name": "styles",
+      "source": "./plugins/styles",
+      "description": "[PER PROJECT] Visual design style languages (brutalism, glassmorphism, retro, editorial and many more) to pick a look for a UI."
+    },
+    {
+      "name": "thesis",
+      "source": "./plugins/thesis",
+      "description": "[PER PROJECT] Skills for the TFM (master thesis) project on migration policy."
+    },
+    {
+      "name": "workflow",
+      "source": "./plugins/workflow",
+      "description": "[PER PROJECT] General workflow helpers: security audits and keeping slides, script and paper in sync."
+    },
+    {
+      "name": "superpowers",
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers"
+      },
+      "description": "[ALWAYS ON] Slows Claude down to plan, test first and verify its own work before finishing. By Jesse Vincent (MIT)."
+    },
+    {
+      "name": "task-observer",
+      "source": {
+        "source": "github",
+        "repo": "rebelytics/one-skill-to-rule-them-all"
+      },
+      "description": "[ALWAYS ON] Watches your sessions and proposes small, reviewed improvements to your skills. Nothing changes until you approve. By Eoghan Henn (CC BY 4.0)."
+    },
+    {
+      "name": "impeccable",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/pbakaus/impeccable.git",
+        "path": "plugin"
+      },
+      "description": "[PER PROJECT] Design taste for frontend work: audit, polish and critique commands plus anti pattern checks. By Paul Bakaus."
+    },
+    {
+      "name": "memory",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/thedotmack/claude-mem.git",
+        "path": "plugin"
+      },
+      "description": "[LOCAL MACHINE ONLY] Persistent memory plugin (claude-mem by Alex Newman, Apache 2.0): background worker plus local database. Use on your own computer, not in cloud sessions."
+    }
+  ]
+}

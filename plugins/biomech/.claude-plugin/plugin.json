@@ -1,0 +1,8 @@
+{
+  "name": "biomech",
+  "description": "Biomechanics expert pipeline with Python scripts.",
+  "version": "1.0.0",
+  "author": {
+    "name": "rplaneell"
+  }
+}
