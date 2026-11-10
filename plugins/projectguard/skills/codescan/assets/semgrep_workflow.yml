@@ -1,0 +1,16 @@
+name: semgrep
+# Code scan, report only at first. Free command line Semgrep: no account, nothing uploaded (metrics off).
+# After copying: run  python3 pin_actions.py --write --newest  so the actions are pinned to full commit SHAs.
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install semgrep==1.0.0   # replace with the exact version you tested
+      - name: Self test, then scan
+        run: python3 tools/semgrep_check.py --rules .semgrep/rules.yml --fixtures .semgrep/fixtures --target semgrep_input --prepare "python3 tools/extract_inline_scripts.py dist/app.html semgrep_input"

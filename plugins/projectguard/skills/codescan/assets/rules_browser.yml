@@ -1,0 +1,63 @@
+rules:
+  - id: pg_html_injection_sink
+    languages: [javascript]
+    severity: WARNING
+    message: >-
+      HTML is built from a value that is not a plain string. If any part can come from a file name, a CSV cell
+      or a session file, hostile text could run as code (XSS). Escape it or use textContent.
+    pattern-either:
+      - pattern: $EL.innerHTML = $X
+      - pattern: $EL.innerHTML += $X
+      - pattern: $EL.outerHTML = $X
+      - pattern: $EL.insertAdjacentHTML($POS, $X)
+      - pattern: document.write(...)
+      - pattern: document.writeln(...)
+    pattern-not: $EL.innerHTML = "..."
+  - id: pg_dynamic_code
+    languages: [javascript]
+    severity: ERROR
+    message: Code is built from text at run time (eval, new Function, string timers). Never allowed in this tool.
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: new Function(...)
+      - pattern: setTimeout("...", ...)
+      - pattern: setInterval("...", ...)
+      - pattern: setTimeout($S + $T, ...)
+  - id: pg_network_api
+    languages: [javascript]
+    severity: ERROR
+    message: A network API appears. This tool must never contact a server (the CSP forbids it too).
+    pattern-either:
+      - pattern: fetch(...)
+      - pattern: new XMLHttpRequest(...)
+      - pattern: new WebSocket(...)
+      - pattern: new EventSource(...)
+      - pattern: navigator.sendBeacon(...)
+      - pattern: importScripts(...)
+      - pattern: new Worker(...)
+  - id: pg_storage_or_cookie
+    languages: [javascript]
+    severity: WARNING
+    message: Data is stored in the browser (cookie, localStorage, sessionStorage, IndexedDB). The tool is meant to keep nothing.
+    pattern-either:
+      - pattern: document.cookie
+      - pattern: localStorage
+      - pattern: sessionStorage
+      - pattern: indexedDB
+  - id: pg_navigation_or_window
+    languages: [javascript]
+    severity: WARNING
+    message: Page navigation or a new window is controlled by a value. Check where the value comes from.
+    pattern-either:
+      - pattern: window.open(...)
+      - pattern: location.href = $X
+      - pattern: location.assign(...)
+      - pattern: location.replace(...)
+      - pattern: window.location = $X
+  - id: pg_cross_window_message
+    languages: [javascript]
+    severity: WARNING
+    message: Messages between windows are used. Check the origin of every message.
+    pattern-either:
+      - pattern: $W.postMessage(...)
+      - pattern: addEventListener("message", ...)

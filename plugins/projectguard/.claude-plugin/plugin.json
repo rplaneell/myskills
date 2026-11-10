@@ -1,0 +1,8 @@
+{
+  "name": "projectguard",
+  "description": "Make any project traceable, backtested and secure: secrets, CI hardening, repository controls, code scanning, backtests, property tests, hostile input tests, UI tests, coverage floor, mutation checks, release integrity and a security checklist.",
+  "version": "1.0.0",
+  "author": {
+    "name": "rplaneell"
+  }
+}

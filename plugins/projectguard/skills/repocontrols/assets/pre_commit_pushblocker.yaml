@@ -1,0 +1,10 @@
+# Add this block under `repos:` in .pre-commit-config.yaml (next to the secret scanner), and put no_push_to_main.py in tools/.
+  - repo: local
+    hooks:
+      - id: no-push-to-main
+        name: refuse direct pushes to main or master
+        entry: python3 tools/no_push_to_main.py          # on Windows use: python tools/no_push_to_main.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]

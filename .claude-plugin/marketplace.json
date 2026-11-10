@@ -31,6 +31,11 @@
       "description": "[PER PROJECT] Animation, interaction and UI craft skills, plus Swift and mobile native."
     },
     {
+      "name": "projectguard",
+      "source": "./plugins/projectguard",
+      "description": "[PER PROJECT] Make any project traceable, backtested and secure: secrets, CI hardening, repository controls, code scanning, backtests, property tests, hostile input tests, UI tests, coverage floor, mutation checks, release integrity and a security checklist."
+    },
+    {
       "name": "scholar",
       "source": "./plugins/scholar",
       "description": "[PER PROJECT] Academic research and writing: literature review, analysis, citations, replication, journal submission."

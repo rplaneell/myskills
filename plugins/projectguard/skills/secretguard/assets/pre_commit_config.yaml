@@ -1,0 +1,8 @@
+# Runs on your own computer just before each commit is saved. Setup: pip install pre-commit && pre-commit install
+default_install_hook_types: [pre-commit, pre-push]     # one install command switches on both the commit and the push hooks
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1          # pinned on purpose (this version was tested); change only after reading the release notes
+    hooks:
+      - id: gitleaks      # scans the changes you are about to commit for keys, tokens and passwords
+        stages: [pre-commit]

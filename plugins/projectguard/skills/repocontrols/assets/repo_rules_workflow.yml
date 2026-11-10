@@ -1,0 +1,30 @@
+name: repo-rules
+# Replaces paid branch protection with automatic alarms. After copying, pin the checkout action with pin_actions.py.
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check files, workflows and the commits of this push
+        env:
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT" = "pull_request" ]; then
+            RANGE="$PR_BASE..$PR_HEAD"
+          elif [ -z "${BEFORE//0/}" ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            RANGE="origin/main..$HEAD_SHA"          # new branch or force push: check everything not on main yet
+          else
+            RANGE="$BEFORE..$HEAD_SHA"
+          fi
+          echo "checking commits $RANGE"
+          python3 tools/check_repo_rules.py "$RANGE"
