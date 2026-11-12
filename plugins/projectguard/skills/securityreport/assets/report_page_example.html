@@ -1,0 +1,45 @@
+<meta name="dash-one-writer">
+<style>
+.sr { --o-clean: var(--color-ok); --o-fixed: var(--color-ok); --o-open: var(--color-bad); --o-partial: var(--color-warn); max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--cds-gap-xl); color: var(--color-fg); font-family: var(--font-anthropic-sans); }
+.sr * { box-sizing: border-box; } .sr p { margin: 0; } .sr h1, .sr h2 { margin: 0; font-family: var(--font-anthropic-serif); font-weight: 400; }
+.sr-lede { max-width: 66ch; font-size: 17px; line-height: 1.55; } .sr-lede b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.sr-chart { position: relative; min-height: 40px; } .sr-chart svg { display: block; width: 100%; height: auto; } .sr-chart text { fill: var(--color-fg-muted); font-size: 12px; } .sr-chart text.on { fill: var(--color-bg); font-weight: 600; }
+.sr-tablewrap { overflow-x: auto; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-panel); }
+.sr-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 640px; } .sr-table th { text-align: left; font-weight: 500; color: var(--color-fg-muted); padding: 8px 10px; border-bottom: 1px solid var(--color-border-line); }
+.sr-table td { padding: 9px 10px; border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+</style>
+<div class="sr">
+  <header>
+    <h1 id="top">Security checks (example)</h1>
+    <p class="sr-lede"><b data-draw="num" data-source="summary" data-field="total" data-row="0">—</b> checks were run. <b data-draw="num" data-source="summary" data-field="clean" data-row="0">—</b> found nothing wrong and <b data-draw="num" data-source="summary" data-field="open" data-row="0">—</b> is still open.</p>
+  </header>
+  <div class="sr-chart" data-draw="outcomeBar" data-source="summary">—</div>
+  <div class="sr-tablewrap"><table class="sr-table" data-source="checks" data-row-key="id">
+    <thead><tr><th data-field="id">#</th><th data-field="area">Area</th><th data-field="check">Check</th><th data-field="outcome">Outcome</th><th data-field="detail">What was seen</th><th data-field="limit">What it cannot tell you</th></tr></thead>
+    <tbody data-draw="checksBody"></tbody></table></div>
+</div>
+<script>
+(function () {
+  const root = document.querySelector('.sr');
+  const col = { clean: 'var(--color-ok)', fixed: dash.colors[0], open: 'var(--color-bad)', partial: 'var(--color-warn)' };
+  const OUT = { clean: 'Found nothing wrong', fixed: 'Found a problem, fixed', open: 'Problem still open', partial: 'Only partly proven' };
+  const rowsOf = (id) => { const d = dash.data(id); return d.status === 'ok' && Array.isArray(d.data) ? d.data : null; };
+  dash.calc('summary', { inputs: ['checks'], title: 'Totals of the checks', description: 'Counts of the checks by outcome.',
+    fn: (checks) => { const n = (o) => checks.filter((r) => r.outcome === o).length; return [{ total: checks.length, clean: n('clean'), fixed: n('fixed'), open: n('open'), partial: n('partial') }]; } });
+  dash.draw('num', (el) => { const d = dash.data(el.dataset.source); const row = d.status === 'ok' && d.data ? d.data[+(el.dataset.row || 0)] : null; el.textContent = row ? String(row[el.dataset.field]) : '—'; });
+  dash.draw('outcomeBar', (el) => {
+    const r = rowsOf('summary'); if (!r) { el.textContent = '—'; return; }
+    const s = r[0], w = Math.max(280, el.clientWidth), h = 40; el.replaceChildren();
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${w} ${h}`).attr('role', 'img').attr('aria-label', 'Outcome of ' + s.total + ' checks'); let x = 0;
+    ['clean', 'fixed', 'open', 'partial'].forEach((k) => { if (!s[k]) return; const bw = (w * s[k]) / s.total;
+      const rect = svg.append('rect').attr('x', x + 1).attr('width', Math.max(0, bw - 2)).attr('height', h).attr('rx', 4);
+      if (k === 'fixed') rect.style('fill', 'transparent').style('stroke', col[k]).style('stroke-width', 2); else rect.style('fill', col[k]);
+      if (bw > 26) svg.append('text').attr('class', 'on').attr('x', x + bw / 2).attr('y', h / 2 + 4).attr('text-anchor', 'middle').text(s[k]); x += bw; });
+  });
+  dash.draw('checksBody', (tb) => {
+    const r = rowsOf('checks'); if (!r) { tb.replaceChildren(); return; }
+    const td = (tr, t) => { const c = document.createElement('td'); c.textContent = t == null ? '' : String(t); tr.appendChild(c); };
+    tb.replaceChildren(...r.map((d) => { const tr = document.createElement('tr'); td(tr, d.id); td(tr, d.area); td(tr, d.check); td(tr, OUT[d.outcome] || d.outcome); td(tr, d.detail); td(tr, d.limit); return tr; }));
+  });
+})();
+</script>

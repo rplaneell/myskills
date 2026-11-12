@@ -1,0 +1,7 @@
+[
+ {"id": 1, "area": "Secrets", "check": "SAMPLE: history scan", "outcome": "clean", "proof": "both", "detail": "Example row. Replace with the real result.", "limit": "Example limit."},
+ {"id": 2, "area": "Secrets", "check": "SAMPLE: commit blocker", "outcome": "clean", "proof": "ran", "detail": "Example row.", "limit": "Only where installed."},
+ {"id": 3, "area": "Supply chain", "check": "SAMPLE: actions pinned", "outcome": "fixed", "proof": "both", "detail": "Example row.", "limit": "Protects the future only."},
+ {"id": 4, "area": "Supply chain", "check": "SAMPLE: shipped file source", "outcome": "open", "proof": "ran", "detail": "Example row.", "limit": "Needs a decision."},
+ {"id": 5, "area": "Code scan", "check": "SAMPLE: places building HTML", "outcome": "partial", "proof": "ran", "detail": "Example row.", "limit": "Not all proven."}
+]

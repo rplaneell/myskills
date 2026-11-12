@@ -33,7 +33,7 @@
     {
       "name": "projectguard",
       "source": "./plugins/projectguard",
-      "description": "[PER PROJECT] Make any project traceable, backtested and secure: secrets, CI hardening, repository controls, code scanning, backtests, property tests, hostile input tests, UI tests, coverage floor, mutation checks, release integrity and a security checklist."
+      "description": "[PER PROJECT] Make any project traceable, backtested and secure: a conductor (guardflow) with an evidence ledger, plus skills for secrets, CI hardening, repository controls, dependency audits, code scanning, backtests, property tests, hostile input tests, UI tests, coverage floor, mutation checks, release integrity, porting an old build, a visual report and owner steps."
     },
     {
       "name": "scholar",
