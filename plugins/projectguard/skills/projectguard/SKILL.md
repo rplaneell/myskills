@@ -1,6 +1,6 @@
 ---
 name: projectguard
-description: Start here. A complete, proven method to make any software project traceable, backtested and secure, with the order to adopt it, the working agreements, and a map to the specialized skills (secretguard, cihardening, repocontrols, codescan, backtest, propertytests, hostileinput, uitests, coveragegate, mutationcheck, releaseintegrity, securityaudit). Use when the user asks to make a project robust, secure, professional, traceable or well tested, to set up CI (continuous integration) and tests, to harden a repository, or to audit what protection a project has.
+description: Start here. A complete, proven method to make any software project traceable, backtested and secure, with the order to adopt it, the working agreements, and a map to the specialized skills (secretguard, cihardening, repocontrols, depaudit, codescan, backtest, propertytests, hostileinput, uitests, coveragegate, mutationcheck, releaseintegrity, porting, securityaudit, securityreport, ownersteps) and to guardflow, the conductor that runs them as one protocol. Use when the user asks to make a project robust, secure, professional, traceable or well tested, to set up CI (continuous integration) and tests, to harden a repository, or to audit what protection a project has.
 ---
 
 # projectguard: make a project traceable, backtested and secure
@@ -10,6 +10,10 @@ This is the overview. It explains the method, the order to follow, and how to be
 ## The idea in one paragraph
 
 Professional engineering is not writing code fast, it is being able to release code reliably and recover from disasters. That needs automatic checks that run on every change (CI, continuous integration), tests at several levels, protection against leaked secrets and hostile input, and a record that lets you prove which code produced which result. The cheapest way to get there is a pipeline of small, independent safety layers, each of which has been shown to fail when it should.
+
+## Running it on a real request: use guardflow
+
+This skill explains the method and the reasons. For an actual request (audit this repository, secure this project, add backtests, prepare a release, a key leaked, port an old file, make a report), switch to `guardflow`. It gives the six phase protocol (intake, read only recon, plan and ask, one proven step at a time, report, hand over), the playbooks, the consent checkpoints, and the evidence ledger that every skill writes to.
 
 ## The golden rule: a check that has never failed is unproven
 
@@ -31,15 +35,15 @@ Do the phases in this order. Each ends with an exit rule, so you know it is real
 
 | Phase | Skill | Exit rule |
 |---|---|---|
-| 0. Find out what is really shipped | `releaseintegrity` | one command rebuilds the shipped file and the fingerprint matches |
+| 0. Find out what is really shipped | `releaseintegrity`, then `porting` if it is not built from the sources | one command rebuilds the shipped file and the fingerprint matches |
 | 1. Safety net | `secretguard` | history scan clean, a made up fake key is refused by the commit blocker |
 | 2. Backtests | `backtest`, `propertytests` | changing a formula by a tiny amount fails a test, even after the golden files are regenerated |
 | 3. Hostile input and clicking tests | `hostileinput`, `uitests` | hostile text creates no page element anywhere a person or file can enter text |
 | 4. Coverage floor | `coveragegate` | CI fails when coverage drops below the floor |
-| 5. Hardening CI and the repository | `cihardening`, `repocontrols` | every action pinned, rules check green, local hooks installed |
+| 5. Hardening CI, the repository and the dependencies | `cihardening`, `repocontrols`, `depaudit` | every action pinned, rules check green, local hooks installed |
 | 6. Code scanning | `codescan` | the scanner finds a planted bad file and never scans zero files |
 | 7. Mutation checks | `mutationcheck` | no survivors on the core calculations, or each survivor has a new test |
-| 8. Honest security checklist | `securityaudit` | every item marked applies, not applicable now, or later, with a reason |
+| 8. Honest security checklist, report and owner steps | `securityaudit`, `securityreport`, `ownersteps` | every item marked applies, not applicable now, or later, with a reason |
 
 You can start anywhere, but never skip the self checks. If the project is small, do phases 1, 2 and 5 first.
 

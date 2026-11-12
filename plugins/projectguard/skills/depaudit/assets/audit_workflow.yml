@@ -1,0 +1,35 @@
+name: audit
+# Known vulnerability audit of every dependency, including libraries copied into the project.
+# It also runs every Monday: new vulnerabilities are published even when no code changes.
+# After copying: remove the steps you do not need and run pin_actions.py --write --newest.
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 5 * * 1"
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: npm audit
+        run: npm audit --audit-level=low
+      - name: pip audit
+        run: |
+          pip install pip-audit==2.10.1
+          pip-audit -r requirements.txt --progress-spinner off
+      - name: OSV Scanner (lock files and the vendored libraries list)
+        env:
+          OSV_VERSION: "v2.7.1"
+          # Run scripts/osv_checksum.sh for a new version. Change the version and this fingerprint together.
+          OSV_SHA256: "fb7dab19a8bd9bbe5c3189f09d4b7ee1820c9553a23bac202648a56efd2f6ee8"
+        run: |
+          set -euo pipefail
+          curl -sSfL -o osv-scanner "https://github.com/google/osv-scanner/releases/download/${OSV_VERSION}/osv-scanner_linux_amd64"
+          echo "${OSV_SHA256}  osv-scanner" | sha256sum -c -
+          chmod +x osv-scanner
+          ./osv-scanner scan source -L package-lock.json -L requirements.txt -L sbom/vendored.cdx.json

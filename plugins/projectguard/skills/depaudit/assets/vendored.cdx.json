@@ -1,0 +1,10 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {"component": {"type": "application", "name": "your-project"},
+    "properties": [{"name": "purpose", "value": "Lists libraries copied into the project or used at build time that are not in a lock file, so the vulnerability audit can see them. Keep the versions equal to THIRD_PARTY.md (a test checks this)."}]},
+  "components": [
+    {"type": "library", "name": "examplelib", "version": "1.2.3", "purl": "pkg:npm/examplelib@1.2.3"}
+  ]
+}
